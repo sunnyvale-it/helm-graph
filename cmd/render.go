@@ -16,6 +16,8 @@ limitations under the License.
 package cmd
 
 import (
+	"fmt"
+
 	"github.com/spf13/cobra"
 	"github.com/sunnyvale-it/helm-graph/chart"
 )
@@ -23,6 +25,7 @@ import (
 var Name string
 var Version string
 var Repo string
+var OutputFormat string
 
 // renderCmd represents the render command
 var renderCmd = &cobra.Command{
@@ -41,6 +44,16 @@ to quickly create a Cobra application.`,
 		chart.Name = Name
 		chart.Version = Version
 		chart.Repo = Repo
+
+		chart.Graph()
+
+		if OutputFormat == "json" {
+			fmt.Println("JSON")
+		}
+
+		if OutputFormat == "yaml" {
+			fmt.Println("YAML")
+		}
 
 	},
 }
@@ -66,5 +79,7 @@ func init() {
 
 	renderCmd.Flags().StringVarP(&Repo, "repo", "r", "", "The chart repo in URI format (required)")
 	renderCmd.MarkFlagRequired("repo")
+
+	renderCmd.Flags().StringVarP(&OutputFormat, "output", "o", "json", "The graph output format (json / yaml)")
 
 }

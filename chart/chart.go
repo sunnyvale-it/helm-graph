@@ -7,6 +7,5 @@ type Chart struct {
 	Deps    []Chart
 }
 
-func Test(chrt *Chart) {
-
+func (c *Chart) Graph() {
 }
