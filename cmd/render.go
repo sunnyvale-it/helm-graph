@@ -16,13 +16,9 @@ limitations under the License.
 package cmd
 
 import (
-	"fmt"
-
-	"encoding/json"
-
-	"github.com/ghodss/yaml"
 	"github.com/spf13/cobra"
 	"github.com/sunnyvale-it/helm-graph/chart"
+	"github.com/sunnyvale-it/helm-graph/output"
 )
 
 var Name string
@@ -50,23 +46,7 @@ to quickly create a Cobra application.`,
 
 		chart.Graph()
 
-		if OutputFormat == "json" {
-			json, err := json.Marshal(chart)
-			if err != nil {
-				fmt.Printf("An error occured: %v\n", err)
-				return
-			}
-			fmt.Println(string(json))
-		}
-
-		if OutputFormat == "yaml" {
-			yaml, err := yaml.Marshal(chart)
-			if err != nil {
-				fmt.Printf("An error occured: %v\n", err)
-				return
-			}
-			fmt.Println(string(yaml))
-		}
+		output.Write(OutputFormat, chart)
 
 	},
 }
