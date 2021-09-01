@@ -72,8 +72,11 @@ func getChartDependencies(chart Chart) []Chart {
 	for _, v := range deps {
 		tmpChart := &chart
 		tmpChart.Name = v.Name
+		tmpChart.Version = v.Version
 
 		chartDeps = append(chartDeps, *tmpChart)
+
+		tmpChart.Deps = chartDeps
 
 	}
 
@@ -85,12 +88,7 @@ func (chart *Chart) Graph() {
 
 	for _, v := range getChartDependencies(*chart) {
 		chart.Deps = append(chart.Deps, v)
-	}
-
-	for _, v := range chart.Deps {
-		if len(v.Deps) > 0 {
-			v.Graph()
-		}
+		v.Graph()
 	}
 
 }
