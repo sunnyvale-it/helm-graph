@@ -37,7 +37,7 @@ deps:
 Pretty print json output with jq
 
 ```console
-$ go run main.go render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0.5 -o json | jq .
+$ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0.5 -o json | jq .
 {
   "Name": "kafka",
   "Version": "14.0.5",
@@ -86,7 +86,7 @@ $ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0
 }
 ```
 
-All the charts as objects in an array, removing duplicated:
+All the charts as objects in a flat array, removing duplicated:
 
 ```console
 $ helm-graph render --name "airflow" -r https://charts.bitnami.com/bitnami -v 10.3.1 -o json |  jq '[.. | objects | select(has("Deps")) | {Name: .Name, Version: .Version, Repo: .Repo}] |unique'                                                                                                     
