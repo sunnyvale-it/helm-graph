@@ -74,6 +74,7 @@ func getChartDependencies(chart Chart) []Chart {
 		tmpChart.Name = v.Name
 		tmpChart.Version = v.Version
 		tmpChart.Deps = nil
+		tmpChart.Repo = v.Repository
 
 		chartDeps = append(chartDeps, *tmpChart)
 
