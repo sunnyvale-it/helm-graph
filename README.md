@@ -103,3 +103,9 @@ $ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0
   "Deps.1.Deps.0.Repo": "https://charts.bitnami.com/bitnami"
 }
 ```
+
+All the charts as objects in an array, removing duplicated:
+
+```console
+$ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0.5 -o json |  jq '[.. | objects | select(has("Deps")) | {Name: .Name, Version: .Version, Repo: .Repo}] |unique'
+```
