@@ -107,5 +107,32 @@ $ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0
 All the charts as objects in an array, removing duplicated:
 
 ```console
-$ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0.5 -o json |  jq '[.. | objects | select(has("Deps")) | {Name: .Name, Version: .Version, Repo: .Repo}] |unique'
+$ helm-graph render --name "airflow" -r https://charts.bitnami.com/bitnami -v 10.3.1 -o json |  jq '[.. | objects | select(has("Deps")) | {Name: .Name, Version: .Version, Repo: .Repo}] |unique'                                                                                                     
+[
+  {
+    "Name": "airflow",
+    "Version": "10.3.1",
+    "Repo": "https://charts.bitnami.com/bitnami"
+  },
+  {
+    "Name": "common",
+    "Version": "1.7.1",
+    "Repo": "https://charts.bitnami.com/bitnami"
+  },
+  {
+    "Name": "common",
+    "Version": "1.8.0",
+    "Repo": "https://charts.bitnami.com/bitnami"
+  },
+  {
+    "Name": "postgresql",
+    "Version": "10.9.3",
+    "Repo": "https://charts.bitnami.com/bitnami"
+  },
+  {
+    "Name": "redis",
+    "Version": "14.8.11",
+    "Repo": "https://charts.bitnami.com/bitnami"
+  }
+]
 ```
