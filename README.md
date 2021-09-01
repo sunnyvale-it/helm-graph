@@ -12,24 +12,6 @@ repo: https://charts.bitnami.com/bitnami
 deps: []
 ```
 
-Flat dependencies:
-
-```console
-$ helm-graph render --name "grafana-tempo" -r https://charts.bitnami.com/bitnami -v 0.2.5 -o yaml
-name: grafana-tempo
-version: 0.2.5
-repo: https://charts.bitnami.com/bitnami
-deps:
-- name: common
-  version: 0.2.5
-  repo: https://charts.bitnami.com/bitnami
-  deps: []
-- name: memcached
-  version: 0.2.5
-  repo: https://charts.bitnami.com/bitnami
-  deps: []
-```
-
 Nested dependencies:
 
 ```console
