@@ -51,3 +51,55 @@ deps:
     repo: https://charts.bitnami.com/bitnami
     deps: []
 ```
+
+Pretty print json output with jq
+
+```console
+$ go run main.go render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0.5 -o json | jq .
+{
+  "Name": "kafka",
+  "Version": "14.0.5",
+  "Repo": "https://charts.bitnami.com/bitnami",
+  "Deps": [
+    {
+      "Name": "common",
+      "Version": "1.8.0",
+      "Repo": "https://charts.bitnami.com/bitnami",
+      "Deps": null
+    },
+    {
+      "Name": "zookeeper",
+      "Version": "7.4.1",
+      "Repo": "https://charts.bitnami.com/bitnami",
+      "Deps": [
+        {
+          "Name": "common",
+          "Version": "1.8.0",
+          "Repo": "https://charts.bitnami.com/bitnami",
+          "Deps": null
+        }
+      ]
+    }
+  ]
+}
+```
+
+Flat json output with jq:
+
+```console
+$ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0.5 -o json |  jq '[leaf_paths as $path | {"key": $path | join("."), "value": getpath($path)}] | from_entries'
+{
+  "Name": "kafka",
+  "Version": "14.0.5",
+  "Repo": "https://charts.bitnami.com/bitnami",
+  "Deps.0.Name": "common",
+  "Deps.0.Version": "1.8.0",
+  "Deps.0.Repo": "https://charts.bitnami.com/bitnami",
+  "Deps.1.Name": "zookeeper",
+  "Deps.1.Version": "7.4.1",
+  "Deps.1.Repo": "https://charts.bitnami.com/bitnami",
+  "Deps.1.Deps.0.Name": "common",
+  "Deps.1.Deps.0.Version": "1.8.0",
+  "Deps.1.Deps.0.Repo": "https://charts.bitnami.com/bitnami"
+}
+```

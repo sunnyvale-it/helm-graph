@@ -88,7 +88,9 @@ func (chart *Chart) Graph() {
 
 	for _, v := range getChartDependencies(*chart) {
 		chart.Deps = append(chart.Deps, v)
-		v.Graph()
+		if len(v.Deps) > 0 {
+			v.Graph()
+		}
 	}
 
 }
