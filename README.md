@@ -34,4 +34,20 @@ Nested dependencies:
 
 ```console
 $ helm-graph render --name "kafka" -r https://charts.bitnami.com/bitnami -v 14.0.5 -o yaml
+name: kafka
+version: 14.0.5
+repo: https://charts.bitnami.com/bitnami
+deps:
+- name: common
+  version: 1.8.0
+  repo: https://charts.bitnami.com/bitnami
+  deps: []
+- name: zookeeper
+  version: 7.4.1
+  repo: https://charts.bitnami.com/bitnami
+  deps:
+  - name: common
+    version: 1.8.0
+    repo: https://charts.bitnami.com/bitnami
+    deps: []
 ```
