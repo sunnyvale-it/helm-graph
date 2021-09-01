@@ -1,6 +1,6 @@
 
 
-## Output examples
+## Usage examples
 
 No dependencies:
 
